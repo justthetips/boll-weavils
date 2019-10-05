@@ -15,7 +15,7 @@ export default function LinksScreen() {
 }
 
 LinksScreen.navigationOptions = {
-  title: 'Links',
+  title: 'Sign Me Up',
 };
 
 const styles = StyleSheet.create({
