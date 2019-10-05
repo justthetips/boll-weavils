@@ -68,9 +68,7 @@ componentDidMount = () => {
         });
 
         const stops = responseJson.Stops;
-
-
-
+        
         console.log(stops);
          this.setState({
           stops,
