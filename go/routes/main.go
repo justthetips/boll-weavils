@@ -169,6 +169,7 @@ func clientError(status int) (events.APIGatewayProxyResponse, error) {
 	}, nil
 }
 
+//The lambda
 func main() {
 	lambda.Start(show)
 }
