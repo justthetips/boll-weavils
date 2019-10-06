@@ -15,16 +15,20 @@ import MapView, {Marker} from 'react-native-maps'
 
 import { MonoText } from '../components/StyledText';
 
-//export default class App extends React.Component {
 export default class HomeScreen extends React.Component {
   
 componentDidMount = () => {
     this.getRouteData();
+
+    setInterval(() => {
+      this.getTransitVans();
+    }, 100);
  }
   
  constructor(props){
     super(props);
     this.state = {
+      vans: [],
       region: {
         latitude: 26.501,
         longitude: -80.232,
@@ -54,13 +58,37 @@ componentDidMount = () => {
       { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
   )};
 
+  getTransitVans = () => {
+    fetch('https://xajgj7zaxg.execute-api.us-east-1.amazonaws.com/prod/vans', {
+         method: 'GET'
+      })
+      .then((response) => response.json())
+      .then((vans) => {
+
+        vans.forEach(van => {
+          van.latitude = Number(van.Latitude);
+          van.longitude = Number(van.Longitude);
+          van.LatLng = {
+            latitude: van.latitude,
+            longitude: van.longitude
+          }
+        });
+
+         this.setState({ vans });
+       
+      })
+      .catch((error) => {
+         console.error(error);
+      });
+  };
+
   getRouteData = () => {
     fetch('https://xajgj7zaxg.execute-api.us-east-1.amazonaws.com/prod/routes?route_number=1', {
          method: 'GET'
       })
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson);
+        //console.log(responseJson);
 
         responseJson.Stops.forEach(stop => {
           stop.LatLng.latitude = Number(stop.LatLng.Latitude);
@@ -69,7 +97,7 @@ componentDidMount = () => {
 
         const stops = responseJson.Stops;
         
-        console.log(stops);
+        //console.log(stops);
          this.setState({
           stops,
           people: [],
@@ -92,6 +120,13 @@ componentDidMount = () => {
               coordinate={marker.LatLng}
               title={marker.Title}
               description={marker.Description}
+            />
+          ))}
+          {this.state.vans.map(marker => (
+            <Marker
+              key={marker.van_id}
+              coordinate={marker.LatLng}
+              pinColor='blue'
             />
           ))}
         </MapView>
