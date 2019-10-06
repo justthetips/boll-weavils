@@ -40,8 +40,8 @@ func show(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, er
 	for _, state := range states {
 		newState := State{
 			VanID:     state.VanID,
-			Latitude:  state.Latitude + (rand.Float64()-.5)*.1,
-			Longitude: state.Longitude + (rand.Float64()-.5)*.1,
+			Latitude:  state.Latitude + (rand.Float64()-.5)*.001,
+			Longitude: state.Longitude + (rand.Float64()-.5)*.001,
 		}
 		input := &dynamodb.UpdateItemInput{
 			ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
