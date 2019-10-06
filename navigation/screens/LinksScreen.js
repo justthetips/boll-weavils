@@ -1,5 +1,7 @@
 import React from 'react';
 import { ScrollView, View, Button, StyleSheet, Picker, Text, TextInput } from 'react-native';
+import GenerateForm from 'react-native-form-builder';
+import { AppRegistry } from 'react-native';
 
 export default class LinksScreen extends React.Component {
  
@@ -57,6 +59,8 @@ export default class LinksScreen extends React.Component {
           onValueChange={(itemValue, itemIndex) =>
             this.setState({hour: itemValue})
           }>
+           
+            <Picker.Item label="12" value="12" />
             <Picker.Item label="1" value="1" />
             <Picker.Item label="2" value="2" />
             <Picker.Item label="3" value="3" />
@@ -68,8 +72,6 @@ export default class LinksScreen extends React.Component {
             <Picker.Item label="9" value="9" />
             <Picker.Item label="10" value="10" />
             <Picker.Item label="11" value="11" />
-            <Picker.Item label="12" value="12" />
-
         </Picker>
         <Picker
           selectedValue={this.state.minute}
