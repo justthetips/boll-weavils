@@ -1,7 +1,5 @@
 import React from 'react';
 import { ScrollView, View, Button, StyleSheet, Picker, Text, TextInput } from 'react-native';
-import GenerateForm from 'react-native-form-builder';
-import { AppRegistry } from 'react-native';
 
 export default class LinksScreen extends React.Component {
  
