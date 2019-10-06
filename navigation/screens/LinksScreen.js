@@ -28,6 +28,7 @@ export default class LinksScreen extends React.Component {
       })
       .then((response) => response.json())
       .then((responseJson) => {
+        alert('Ok!  You are signed up!  Check your email for details.')
         console.log(responseJson);
          
       })
@@ -43,7 +44,7 @@ export default class LinksScreen extends React.Component {
     return (
       <View style={styles.container}>
         
-        <Text>Where do you want to go?</Text>
+        <Text style={styles.label}>Where do you want to go?</Text>
         <TextInput
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
         onChangeText={text => onChangeText(text)}
@@ -104,6 +105,9 @@ LinksScreen.navigationOptions = {
 };
 
 const styles = StyleSheet.create({
+  label:{
+    paddingLeft: 15
+  },
   container: {
     flex: 1,
     paddingTop: 15,

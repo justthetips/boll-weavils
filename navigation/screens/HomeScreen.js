@@ -64,17 +64,18 @@ componentDidMount = () => {
       })
       .then((response) => response.json())
       .then((vans) => {
+        if(vans && vans.length > 0){
+          vans.forEach(van => {
+            van.latitude = Number(van.Latitude);
+            van.longitude = Number(van.Longitude);
+            van.LatLng = {
+              latitude: van.latitude,
+              longitude: van.longitude
+            }
+          });
 
-        vans.forEach(van => {
-          van.latitude = Number(van.Latitude);
-          van.longitude = Number(van.Longitude);
-          van.LatLng = {
-            latitude: van.latitude,
-            longitude: van.longitude
-          }
-        });
-
-         this.setState({ vans });
+          this.setState({ vans });
+        }
        
       })
       .catch((error) => {
